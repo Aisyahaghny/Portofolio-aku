@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portofolio | Aisyah Aghny Nur Azhari</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        sage: '#607456',
+                        cream: '#EEE0CC',
+                        terracotta: '#BA6A4C',
+                        maroon: '#7B2525',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #EEE0CC;
+            color: #7B2525;
+        }
+        .custom-shadow {
+            box-shadow: 0 10px 30px -5px rgba(96, 116, 86, 0.2);
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px -5px rgba(186, 106, 76, 0.25);
+        }
+    </style>
+</head>
+<body class="bg-[#EEE0CC] text-[#7B2525] antialiased selection:bg-[#BA6A4C] selection:text-white">
+
+    <!-- Toast Notification (Custom alert replacement) -->
+    <div id="toast" class="fixed bottom-5 right-5 z-50 transform translate-y-20 opacity-0 transition-all duration-300 bg-[#7B2525] text-[#EEE0CC] px-6 py-3 rounded-xl shadow-2xl flex items-center gap-3 border border-[#BA6A4C]">
+        <i class="fa-solid fa-circle-check text-[#EEE0CC]"></i>
+        <span id="toast-message" class="font-medium text-sm">Berhasil disalin ke clipboard!</span>
+    </div>
+
+    <!-- Navigation Bar -->
+    <header class="sticky top-0 z-40 bg-[#EEE0CC]/90 backdrop-blur-md border-b border-[#607456]/20 transition-all">
+        <div class="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="#cover" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-full bg-[#607456] flex items-center justify-center text-[#EEE0CC] font-bold text-lg shadow-md group-hover:bg-[#BA6A4C] transition-colors">
+                    AA
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-bold text-lg tracking-tight text-[#7B2525]">Aisyah Aghny</span>
+                    <span class="text-xs text-[#607456] font-semibold tracking-wider uppercase">Portfolio</span>
+                </div>
+            </a>
+
+            <!-- Desktop Menu -->
+            <nav class="hidden md:flex items-center gap-8 font-medium text-sm">
+                <a href="#cover" class="hover:text-[#BA6A4C] transition-colors py-1 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-[#BA6A4C] hover:after:w-full after:transition-all">Beranda</a>
+                <a href="#about" class="hover:text-[#BA6A4C] transition-colors py-1 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-[#BA6A4C] hover:after:w-full after:transition-all">Tentang & Pendidikan</a>
+                <a href="#portfolio" class="hover:text-[#BA6A4C] transition-colors py-1 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-[#BA6A4C] hover:after:w-full after:transition-all">Karya Web</a>
+                <a href="#contact" class="hover:text-[#BA6A4C] transition-colors py-1 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-[#BA6A4C] hover:after:w-full after:transition-all">Kontak</a>
+            </nav>
+
+            <!-- CTA Header Button -->
+            <div class="hidden md:block">
+                <a href="#contact" class="px-5 py-2.5 rounded-xl bg-[#607456] text-[#EEE0CC] font-semibold text-sm shadow-md hover:bg-[#BA6A4C] transition-all transform hover:-translate-y-0.5">
+                    Hubungi Saya
+                </a>
+            </div>
+
+            <!-- Mobile Menu Toggle -->
+            <button id="menu-btn" class="md:hidden text-2xl text-[#7B2525] focus:outline-none p-2">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-[#EEE0CC] border-b border-[#607456]/20 px-6 py-4 space-y-3 shadow-xl">
+            <a href="#cover" class="block py-2 font-medium hover:text-[#BA6A4C]">Beranda</a>
+            <a href="#about" class="block py-2 font-medium hover:text-[#BA6A4C]">Tentang & Pendidikan</a>
+            <a href="#portfolio" class="block py-2 font-medium hover:text-[#BA6A4C]">Karya Web</a>
+            <a href="#contact" class="block py-2 font-medium hover:text-[#BA6A4C]">Kontak</a>
+            <div class="pt-2">
+                <a href="#contact" class="block text-center py-2.5 rounded-xl bg-[#607456] text-[#EEE0CC] font-semibold text-sm shadow">Hubungi Saya</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- 1. Halaman Depan (Cover / Hero Section) -->
+        <section id="cover" class="min-h-[calc(100vh-80px)] flex items-center py-16 px-6 relative overflow-hidden">
+            <!-- Decorative Background Shapes -->
+            <div class="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-[#607456]/10 blur-3xl pointer-events-none"></div>
+            <div class="absolute -bottom-24 -left-24 w-96 h-96 rounded-full bg-[#BA6A4C]/10 blur-3xl pointer-events-none"></div>
+
+            <div class="max-w-6xl mx-auto w-full grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
+                <div class="md:col-span-7 space-y-6 text-left">
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#607456]/15 text-[#607456] font-semibold text-xs tracking-wide">
+                        <i class="fa-solid fa-sparkles text-[#BA6A4C]"></i> Portofolio Resmi Aisyah Aghny
+                    </div>
+                    
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-[#7B2525] leading-tight">
+                        Halo, Saya <br><span class="text-[#BA6A4C] underline decoration-[#607456]/40 decoration-wavy underline-offset-8">Aisyah Aghny Nur Azhari</span>
+                    </h1>
+
+                    <p class="text-lg sm:text-xl font-medium text-[#607456] leading-relaxed">
+                        Siswi dari <span class="font-bold text-[#7B2525]">SMA Budi Luhur Samarinda</span>. Memiliki keahlian dalam <span class="font-semibold text-[#BA6A4C]">Public Speaking</span>, mampu berinteraksi dengan baik terhadap audiens, serta memiliki kemampuan mendalam di bidang <span class="font-semibold text-[#BA6A4C]">Prompting</span>.
+                    </p>
+
+                    <div class="flex flex-wrap gap-4 pt-4">
+                        <a href="#portfolio" class="px-7 py-3.5 rounded-2xl bg-[#7B2525] text-[#EEE0CC] font-semibold shadow-lg hover:bg-[#BA6A4C] transition-all flex items-center gap-3">
+                            <span>Lihat Karya Web</span>
+                            <i class="fa-solid fa-arrow-right text-sm"></i>
+                        </a>
+                        <a href="#about" class="px-7 py-3.5 rounded-2xl bg-[#607456]/15 border-2 border-[#607456] text-[#7B2525] font-semibold hover:bg-[#607456] hover:text-[#EEE0CC] transition-all">
+                            Kenali Saya Lebih Dekat
+                        </a>
+                    </div>
+
+                    <!-- Quick Stats / Badges -->
+                    <div class="grid grid-cols-3 gap-4 pt-8 border-t border-[#607456]/20">
+                        <div>
+                            <p class="text-2xl font-bold text-[#7B2525]">Public</p>
+                            <p class="text-xs text-[#607456] font-medium uppercase tracking-wider">Speaker</p>
+                        </div>
+                        <div>
+                            <p class="text-2xl font-bold text-[#7B2525]">Expert</p>
+                            <p class="text-xs text-[#607456] font-medium uppercase tracking-wider">AI Prompting</p>
+                        </div>
+                        <div>
+                            <p class="text-2xl font-bold text-[#7B2525]">SMA</p>
+                            <p class="text-xs text-[#607456] font-medium uppercase tracking-wider">Budi Luhur</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Profile Photo Showcase (akucantik.jpg representation) -->
+                <div class="md:col-span-5 flex justify-center">
+                    <div class="relative">
+                        <!-- Decorative Frame Behind -->
+                        <div class="absolute inset-0 bg-[#BA6A4C] rounded-3xl rotate-6 scale-105 opacity-80 shadow-xl"></div>
+                        <div class="absolute inset-0 bg-[#607456] rounded-3xl -rotate-3 scale-105 opacity-60"></div>
+                        
+                        <!-- Main Image Container -->
+                        <div class="relative w-72 sm:w-80 h-96 rounded-3xl overflow-hidden border-4 border-[#EEE0CC] shadow-2xl bg-[#607456] flex flex-col items-center justify-center group">
+                            <!-- Fallback Image / Placeholder representing akucantik.jpg -->
+                            <img src="akucantik.jpeg" alt="akucantik.jpg - Aisyah Aghny" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/400x500/7B2525/EEE0CC?text=Aisyah+Aghny'">
+                            
+                            <!-- Overlay Badge -->
+                            <div class="absolute bottom-4 inset-x-4 bg-[#EEE0CC]/90 backdrop-blur-md p-3 rounded-2xl border border-[#607456]/30 text-center shadow-lg">
+                                <p class="font-bold text-[#7B2525] text-sm">Aisyah Aghny Nur Azhari</p>
+                                <p class="text-xs text-[#607456] font-medium">akucantik.jpg</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Profil Singkat & Pendidikan (About Me & Education) -->
+        <section id="about" class="py-20 px-6 bg-white/40 border-y border-[#607456]/15">
+            <div class="max-w-6xl mx-auto space-y-16">
+                <!-- Section Header -->
+                <div class="text-center space-y-3">
+                    <span class="px-3.5 py-1.5 rounded-full bg-[#BA6A4C]/15 text-[#BA6A4C] font-semibold text-xs tracking-wider uppercase">Tentang & Riwayat</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-[#7B2525]">Profil Singkat & Pendidikan</h2>
+                    <p class="text-[#607456] max-w-2xl mx-auto font-medium">Mengenal lebih jauh latar belakang akademik serta keahlian komunikasi dan teknologi yang saya miliki.</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+                    <!-- Bio & Skills (Left Column) -->
+                    <div class="lg:col-span-6 space-y-6">
+                        <div class="bg-[#EEE0CC] p-8 rounded-3xl border border-[#607456]/20 shadow-lg space-y-6">
+                            <h3 class="text-2xl font-bold text-[#7B2525] flex items-center gap-3">
+                                <i class="fa-solid fa-user-graduate text-[#BA6A4C]"></i> Tentang Saya
+                            </h3>
+                            <p class="text-[#607456] leading-relaxed font-medium">
+                                Halo! Saya adalah seorang siswi aktif di <strong class="text-[#7B2525]">SMA Budi Luhur Samarinda</strong> yang memiliki ketertarikan tinggi di bidang komunikasi publik dan kecerdasan buatan. Saya percaya bahwa kemampuan berbicara di depan umum dan pemanfaatan prompt teknologi yang tepat dapat membawa dampak positif yang besar.
+                            </p>
+
+                            <div class="space-y-4 pt-2">
+                                <h4 class="font-bold text-[#7B2525] text-sm uppercase tracking-wider">Keahlian & Kompetensi Utama:</h4>
+                                
+                                <div class="space-y-3">
+                                    <div>
+                                        <div class="flex justify-between text-sm font-semibold mb-1 text-[#7B2525]">
+                                            <span>Public Speaking & Audience Interaction</span>
+                                            <span>95%</span>
+                                        </div>
+                                        <div class="w-full bg-[#607456]/20 h-2.5 rounded-full overflow-hidden">
+                                            <div class="bg-[#BA6A4C] h-full rounded-full w-[95%]"></div>
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <div class="flex justify-between text-sm font-semibold mb-1 text-[#7B2525]">
+                                            <span>AI Prompting & Engineering</span>
+                                            <span>90%</span>
+                                        </div>
+                                        <div class="w-full bg-[#607456]/20 h-2.5 rounded-full overflow-hidden">
+                                            <div class="bg-[#607456] h-full rounded-full w-[90%]"></div>
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <div class="flex justify-between text-sm font-semibold mb-1 text-[#7B2525]">
+                                            <span>Web Development & Digital Media</span>
+                                            <span>85%</span>
+                                        </div>
+                                        <div class="w-full bg-[#607456]/20 h-2.5 rounded-full overflow-hidden">
+                                            <div class="bg-[#7B2525] h-full rounded-full w-[85%]"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Education Timeline (Right Column) -->
+                    <div class="lg:col-span-6 space-y-6">
+                        <div class="bg-[#EEE0CC] p-8 rounded-3xl border border-[#607456]/20 shadow-lg space-y-6">
+                            <h3 class="text-2xl font-bold text-[#7B2525] flex items-center gap-3">
+                                <i class="fa-solid fa-school text-[#BA6A4C]"></i> Riwayat Pendidikan
+                            </h3>
+
+                            <div class="relative pl-6 space-y-8 before:content-[''] before:absolute before:left-2 before:top-2 before:bottom-2 before:w-0.5 before:bg-[#607456]/30">
+                                <!-- Timeline Item 1 -->
+                                <div class="relative group">
+                                    <div class="absolute -left-[31px] top-1.5 w-4 h-4 rounded-full bg-[#BA6A4C] border-4 border-[#EEE0CC] shadow"></div>
+                                    <div class="bg-white/80 p-5 rounded-2xl border border-[#607456]/20 shadow-sm card-hover">
+                                        <span class="inline-block px-2.5 py-1 rounded-full bg-[#BA6A4C]/15 text-[#BA6A4C] font-semibold text-xs mb-2">2024 - Sekarang</span>
+                                        <h4 class="text-lg font-bold text-[#7B2525]">SMA Budi Luhur Samarinda</h4>
+                                        <p class="text-sm text-[#607456] font-medium mt-1">Pendidikan Menengah Atas (Fokus pengembangan akademik, public speaking, dan proyek kreatif digital).</p>
+                                    </div>
+                                </div>
+
+                                <!-- Timeline Item 2 -->
+                                <div class="relative group">
+                                    <div class="absolute -left-[31px] top-1.5 w-4 h-4 rounded-full bg-[#607456] border-4 border-[#EEE0CC] shadow"></div>
+                                    <div class="bg-white/80 p-5 rounded-2xl border border-[#607456]/20 shadow-sm card-hover">
+                                        <span class="inline-block px-2.5 py-1 rounded-full bg-[#607456]/15 text-[#607456] font-semibold text-xs mb-2">2021 - 2024</span>
+                                        <h4 class="text-lg font-bold text-[#7B2525]">SMP Budi Luhur Mandiri</h4>
+                                        <p class="text-sm text-[#607456] font-medium mt-1">Pendidikan Menengah Pertama dengan berbagai kegiatan keaktifan organisasi dan komunikasi.</p>
+                                    </div>
+                                </div>
+
+                                <!-- Timeline Item 3 -->
+                                <div class="relative group">
+                                    <div class="absolute -left-[31px] top-1.5 w-4 h-4 rounded-full bg-[#7B2525] border-4 border-[#EEE0CC] shadow"></div>
+                                    <div class="bg-white/80 p-5 rounded-2xl border border-[#607456]/20 shadow-sm card-hover">
+                                        <span class="inline-block px-2.5 py-1 rounded-full bg-[#7B2525]/15 text-[#7B2525] font-semibold text-xs mb-2">2015 - 2020</span>
+                                        <h4 class="text-lg font-bold text-[#7B2525]">SD Klepek</h4>
+                                        <p class="text-sm text-[#607456] font-medium mt-1">Pendidikan Dasar sebagai fondasi kedisiplinan dan pembelajaran awal.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Daftar Isi & Karya Web (Portfolio) -->
+        <section id="portfolio" class="py-20 px-6">
+            <div class="max-w-6xl mx-auto space-y-12">
+                <div class="text-center space-y-3">
+                    <span class="px-3.5 py-1.5 rounded-full bg-[#607456]/15 text-[#607456] font-semibold text-xs tracking-wider uppercase">Daftar Isi & Portofolio</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-[#7B2525]">Hasil Karya Web Saya</h2>
+                    <p class="text-[#607456] max-w-2xl mx-auto font-medium">Menampilkan proyek kreatif dan interaktif yang telah saya kembangkan.</p>
+                </div>
+
+                <!-- Featured Project Card -->
+                <div class="bg-[#EEE0CC] rounded-3xl border-2 border-[#607456]/30 shadow-xl overflow-hidden card-hover">
+                    <div class="grid grid-cols-1 lg:grid-cols-12">
+                        <!-- Project Visual Mockup / Banner -->
+                        <div class="lg:col-span-5 bg-[#607456] p-8 sm:p-12 text-[#EEE0CC] flex flex-col justify-between relative overflow-hidden">
+                            <div class="absolute -right-10 -bottom-10 opacity-10 text-9xl font-extrabold">
+                                <i class="fa-solid fa-gamepad"></i>
+                            </div>
+                            <div class="space-y-4 z-10">
+                                <span class="px-3 py-1 rounded-full bg-[#BA6A4C] text-[#EEE0CC] text-xs font-bold uppercase tracking-wider">Web Game Ekonomi</span>
+                                <h3 class="text-2xl sm:text-3xl font-bold leading-tight">Implementation Plan - Redesign Light Comic Thief Puzzle</h3>
+                                <p class="text-sm text-[#EEE0CC]/80 font-medium">Solstice Genk Project</p>
+                            </div>
+                            <div class="pt-8 z-10">
+                                <div class="inline-flex items-center gap-2 text-xs font-semibold px-3.5 py-1.5 rounded-full bg-[#7B2525] text-[#EEE0CC]">
+                                    <i class="fa-solid fa-code"></i> HTML / CSS / JS Interactive Game
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Project Details & Actions -->
+                        <div class="lg:col-span-7 p-8 sm:p-12 flex flex-col justify-between space-y-8">
+                            <div class="space-y-4">
+                                <h4 class="text-xl font-bold text-[#7B2525]">Detail Proyek & Deskripsi</h4>
+                                <p class="text-[#607456] font-medium leading-relaxed">
+                                    Proyek web game interaktif bertema ekonomi dengan judul <strong class="text-[#7B2525]">"Implementation Plan - Redesign Light Comic Thief Puzzle (Solstice Genk)"</strong>. Proyek ini menggabungkan elemen narasi komik ringan, strategi pemecahan teka-teki (puzzle), dan simulasi konsep ekonomi dalam bentuk permainan web yang menarik dan mendidik.
+                                </p>
+                                <div class="flex flex-wrap gap-2 pt-2">
+                                    <span class="px-3 py-1 rounded-lg bg-[#607456]/15 text-[#607456] text-xs font-semibold">Game Ekonomi</span>
+                                    <span class="px-3 py-1 rounded-lg bg-[#BA6A4C]/15 text-[#BA6A4C] text-xs font-semibold">Light Comic Style</span>
+                                    <span class="px-3 py-1 rounded-lg bg-[#7B2525]/15 text-[#7B2525] text-xs font-semibold">Thief Puzzle Mechanics</span>
+                                    <span class="px-3 py-1 rounded-lg bg-[#607456]/15 text-[#607456] text-xs font-semibold">Solstice Genk</span>
+                                </div>
+                            </div>
+
+                            <div class="flex flex-wrap items-center gap-4 pt-4 border-t border-[#607456]/20">
+                                <button onclick="openProjectModal()" class="px-6 py-3 rounded-xl bg-[#7B2525] text-[#EEE0CC] font-semibold text-sm shadow-md hover:bg-[#BA6A4C] transition-all flex items-center gap-2">
+                                    <i class="fa-solid fa-play"></i> Jalankan / Preview Game
+                                </button>
+                                <button onclick="copyFilePath()" class="px-5 py-3 rounded-xl bg-[#607456]/20 text-[#7B2525] font-semibold text-sm hover:bg-[#607456] hover:text-[#EEE0CC] transition-all flex items-center gap-2">
+                                    <i class="fa-regular fa-copy"></i> Salin File Path
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Informasi Kontak (Contact Section) -->
+        <section id="contact" class="py-20 px-6 bg-white/40 border-t border-[#607456]/15">
+            <div class="max-w-6xl mx-auto space-y-12">
+                <div class="text-center space-y-3">
+                    <span class="px-3.5 py-1.5 rounded-full bg-[#BA6A4C]/15 text-[#BA6A4C] font-semibold text-xs tracking-wider uppercase">Hubungi Saya</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-[#7B2525]">Informasi Kontak</h2>
+                    <p class="text-[#607456] max-w-2xl mx-auto font-medium">Tertarik untuk berkolaborasi, berdiskusi, atau sekadar menyapa? Silakan hubungi saya melalui saluran di bawah ini.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- WhatsApp Card -->
+                    <a href="https://wa.me/6281649183653?text=Halo%20Aisyah%20Aghny,%20saya%20menemukan%20portofolio%20Anda%20dan%20tertarik%20untuk%20berkolaborasi." target="_blank" class="bg-[#EEE0CC] p-8 rounded-3xl border border-[#607456]/20 shadow-lg card-hover flex flex-col items-center text-center space-y-4 group">
+                        <div class="w-16 h-16 rounded-2xl bg-[#607456] text-[#EEE0CC] flex items-center justify-center text-2xl shadow-md group-hover:bg-[#BA6A4C] transition-colors">
+                            <i class="fa-brands fa-whatsapp"></i>
+                        </div>
+                        <div class="space-y-1">
+                            <h3 class="font-bold text-lg text-[#7B2525]">WhatsApp / Telepon</h3>
+                            <p class="text-[#607456] font-semibold text-base">081649183653</p>
+                        </div>
+                        <span class="text-xs font-bold text-[#BA6A4C] uppercase tracking-wider pt-2">Kirim Pesan Langsung &rarr;</span>
+                    </a>
+
+                    <!-- Email Card -->
+                    <a href="mailto:icajenoo23@gmail.com" class="bg-[#EEE0CC] p-8 rounded-3xl border border-[#607456]/20 shadow-lg card-hover flex flex-col items-center text-center space-y-4 group">
+                        <div class="w-16 h-16 rounded-2xl bg-[#BA6A4C] text-[#EEE0CC] flex items-center justify-center text-2xl shadow-md group-hover:bg-[#7B2525] transition-colors">
+                            <i class="fa-solid fa-envelope"></i>
+                        </div>
+                        <div class="space-y-1">
+                            <h3 class="font-bold text-lg text-[#7B2525]">Email Profesional</h3>
+                            <p class="text-[#607456] font-semibold text-sm sm:text-base break-all">icajenoo23@gmail.com</p>
+                        </div>
+                        <span class="text-xs font-bold text-[#BA6A4C] uppercase tracking-wider pt-2">Kirim Email &rarr;</span>
+                    </a>
+
+                    <!-- Instagram Card -->
+                    <a href="https://instagram.com/aghnyazhari" target="_blank" class="bg-[#EEE0CC] p-8 rounded-3xl border border-[#607456]/20 shadow-lg card-hover flex flex-col items-center text-center space-y-4 group">
+                        <div class="w-16 h-16 rounded-2xl bg-[#7B2525] text-[#EEE0CC] flex items-center justify-center text-2xl shadow-md group-hover:bg-[#607456] transition-colors">
+                            <i class="fa-brands fa-instagram"></i>
+                        </div>
+                        <div class="space-y-1">
+                            <h3 class="font-bold text-lg text-[#7B2525]">Instagram</h3>
+                            <p class="text-[#607456] font-semibold text-base">@aghnyazhari</p>
+                        </div>
+                        <span class="text-xs font-bold text-[#BA6A4C] uppercase tracking-wider pt-2">Kunjungi Profil &rarr;</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-[#7B2525] text-[#EEE0CC] py-12 px-6">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
+            <div class="space-y-2">
+                <h3 class="text-xl font-bold">Aisyah Aghny Nur Azhari</h3>
+                <p class="text-xs text-[#EEE0CC]/80">Siswi SMA Budi Luhur Samarinda | Public Speaker & Prompting Specialist</p>
+            </div>
+            <p class="text-xs text-[#EEE0CC]/70 font-medium">
+                &copy; 2026 Aisyah Aghny Nur Azhari. All rights reserved. Designed with style & professionalism.
+            </p>
+        </div>
+    </footer>
+
+    <!-- Project Simulator Modal -->
+    <div id="project-modal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden items-center justify-center p-4">
+        <div class="bg-[#EEE0CC] w-full max-w-2xl rounded-3xl shadow-2xl border-2 border-[#607456] overflow-hidden transform transition-all">
+            <div class="bg-[#607456] text-[#EEE0CC] p-6 flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <i class="fa-solid fa-gamepad text-xl"></i>
+                    <h3 class="font-bold text-lg">Web Game Ekonomi Simulator</h3>
+                </div>
+                <button onclick="closeProjectModal()" class="text-[#EEE0CC] hover:text-white text-xl p-2 focus:outline-none">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="p-8 space-y-6 text-[#7B2525]">
+                <div class="space-y-2">
+                    <h4 class="font-bold text-xl">Implementation Plan - Redesign Light Comic Thief Puzzle</h4>
+                    <p class="text-xs font-semibold text-[#BA6A4C]">Solstice Genk Project (Ekonomi 12-3)</p>
+                </div>
+                <p class="text-[#607456] font-medium text-sm leading-relaxed">
+                    Game ini dirancang untuk memadukan simulasi pengambilan keputusan ekonomi kreatif dengan alur cerita komik ringan dan teka-teki pencuri. 
+                </p>
+                <div class="bg-white/60 p-4 rounded-xl border border-[#607456]/20 space-y-2">
+                    <p class="text-xs font-bold uppercase tracking-wider text-[#7B2525]">File Path Lokal:</p>
+                    <code class="text-xs bg-[#607456]/10 text-[#7B2525] p-2 rounded block select-all font-mono">file:///C:/Ekomomi%2012-3/index.html</code>
+                </div>
+                <div class="flex justify-end gap-3 pt-4 border-t border-[#607456]/20">
+                    <button onclick="closeProjectModal()" class="px-5 py-2.5 rounded-xl bg-[#607456]/20 text-[#7B2525] font-semibold text-sm hover:bg-[#607456] hover:text-[#EEE0CC] transition-all">
+                        Tutup
+                    </button>
+                    <button onclick="simulateLaunch()" class="px-6 py-2.5 rounded-xl bg-[#7B2525] text-[#EEE0CC] font-semibold text-sm hover:bg-[#BA6A4C] transition-all">
+                        Buka Simulasi Game
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript for Interactivity -->
+    <script>
+        // Mobile menu toggle
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when clicking a link
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Toast notification helper
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toast-message');
+            toastMsg.textContent = message;
+            
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+
+            setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+
+        // Copy file path to clipboard
+        function copyFilePath() {
+            const path = "file:///C:/Ekomomi%2012-3/index.html";
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(path).then(() => {
+                    showToast("File path berhasil disalin!");
+                }).catch(() => {
+                    fallbackCopy(path);
+                });
+            } else {
+                fallbackCopy(path);
+            }
+        }
+
+        function fallbackCopy(text) {
+            const textarea = document.createElement("textarea");
+            textarea.value = text;
+            document.body.appendChild(textarea);
+            textarea.select();
+            try {
+                document.execCommand('copy');
+                showToast("File path berhasil disalin!");
+            } catch (err) {
+                showToast("Gagal menyalin file path.");
+            }
+            document.body.removeChild(textarea);
+        }
+
+        // Modal Controls
+        const modal = document.getElementById('project-modal');
+
+        function openProjectModal() {
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeProjectModal() {
+            modal.classList.remove('flex');
+            modal.classList.add('hidden');
+        }
+
+        function simulateLaunch() {
+            closeProjectModal();
+            showToast("Mempersiapkan lingkungan game Ekonomi 12-3 (Solstice Genk)...");
+        }
+
+        // Close modal on outside click
+        window.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeProjectModal();
+            }
+        });
+    </script>
+</body>
+</html>
